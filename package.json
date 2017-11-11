@@ -10,6 +10,6 @@
     "sequelize": "^4.22.6"
   },
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon -e html,js,css app.js"
   }
 }
