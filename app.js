@@ -3,7 +3,11 @@ var express = require('express')
 var app = express()
 var morgan = require('morgan')
 var nunjucks = require('nunjucks')
-var { wikiRouter, userRouter } = require('./routes')
+var {
+  wikiRouter,
+  userRouter,
+  rootRouter
+} = require('./routes')
 var path = require('path')
 var bodyParser = require('body-parser')
 const { db } = require('./models')
@@ -29,5 +33,6 @@ db.sync({})
 
 app.use(express.static(path.join(__dirname, '/public')))
 
+app.use('/', rootRouter)
 app.use('/wiki', wikiRouter)
 app.use('/user', userRouter)
