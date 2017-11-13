@@ -1,10 +1,12 @@
 'use strict'
-
+const { Page } = require('../models')
 const express = require('express')
 const router = express.Router()
 
 router.get('/', (req, res) => {
-  res.render('index')
+  Page.findAll().then(pages => {
+    res.render('index', { pages })
+  }).catch(console.error)
 })
 
 module.exports = {

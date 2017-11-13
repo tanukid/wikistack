@@ -37,6 +37,7 @@ var Page = db.define('page', {
     }
   })
 
+
 const User = db.define('user', {
   name: {
     type: Sequelize.STRING,
@@ -50,6 +51,9 @@ const User = db.define('user', {
     }
   }
 })
+
+// Associations
+Page.belongsTo(User, { as: 'author' })
 
 module.exports = {
   db,

@@ -35,4 +35,4 @@ app.use(express.static(path.join(__dirname, '/public')))
 
 app.use('/', rootRouter)
 app.use('/wiki', wikiRouter)
-app.use('/user', userRouter)
+app.use('/users', userRouter)

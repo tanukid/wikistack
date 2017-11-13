@@ -1,14 +1,17 @@
-var express = require('express');
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
+const { User, Page } = require('../models')
 
 // get user 123, do not change db
 router.get('/:id', (req, res) => {
-  res.send('users')
+  Page.findAll()
 })
 
 // get all users, do not change db
-router.get('/', (req, res) => {
-  res.send('users')
+router.get('/', function (req, res, next) {
+  User.findAll({}).then(function (users) {
+    res.render('users', { users })
+  }).catch(next)
 })
 
 // create a user in the db
