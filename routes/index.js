@@ -1,11 +1,7 @@
-'use strict';
-var express = require('express');
-var router = express.Router();
+'use strict'
 
-
-router.get('/', (req, res) => {
-  res.render('index', {title: 'Express starter'})
-})
-
-module.exports = router
+module.exports = {
+  wikiRouter: require('./wiki'),
+  userRouter: require('./user')
+}
 

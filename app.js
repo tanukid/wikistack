@@ -3,9 +3,10 @@ var express = require('express')
 var app = express()
 var morgan = require('morgan')
 var nunjucks = require('nunjucks')
-var router = require('./routes')
+var { wikiRouter, userRouter } = require('./routes')
 var path = require('path')
 var bodyParser = require('body-parser')
+const { db } = require('./models')
 
 // templating boilerplate setup
 app.engine('html', nunjucks.render) // how to render html templates
@@ -20,11 +21,13 @@ app.use(bodyParser.urlencoded({ extended: true })) // for HTML form submits
 app.use(bodyParser.json()) // would be for AJAX requests
 
 
-// start the server
-var server = app.listen(1337, function () {
-  console.log('listening on port 1337')
-})
+db.sync({})
+  .then(() => {
+    app.listen(3000, () => console.log('Server is listening on port 3000!'))
+  })
+  .catch(console.error)
 
 app.use(express.static(path.join(__dirname, '/public')))
 
-app.use('/', router)
+app.use('/wiki', wikiRouter)
+app.use('/user', userRouter)
